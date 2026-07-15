@@ -1,0 +1,577 @@
+import openpyxl
+from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
+from openpyxl.utils import get_column_letter
+
+wb = openpyxl.Workbook()
+ws = wb.active
+ws.title = "Placement Data"
+
+# Define headers exactly as requested
+headers = [
+    "Company Name",
+    "Company Type",
+    "Campus Date & Time",
+    "Last Registration Date",
+    "Package Min",
+    "Package Max",
+    "Package Avg",
+    "Work Location",
+    "Job Profile",
+    "Eligibility Criteria 10th %",
+    "Eligibility Criteria 12th %",
+    "Eligibility Criteria CGPA/CPI",
+    "Eligibility Criteria Backlog",
+    "Eligibility Criteria Gap",
+    "Eligibility Criteria Branch",
+    "Eligibility Criteria Course",
+    "Selection Process",
+    "Number of Rounds",
+    "Required Documents",
+    "Venue",
+    "Bond",
+    "Stipend",
+    "Other Info"
+]
+
+# Style headers
+header_font = Font(bold=True, color="FFFFFF", size=11)
+header_fill = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
+header_alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+thin_border = Border(
+    left=Side(style='thin'),
+    right=Side(style='thin'),
+    top=Side(style='thin'),
+    bottom=Side(style='thin')
+)
+
+for col, header in enumerate(headers, 1):
+    cell = ws.cell(row=1, column=col, value=header)
+    cell.font = header_font
+    cell.fill = header_fill
+    cell.alignment = header_alignment
+    cell.border = thin_border
+
+# Clean and add the extracted company data
+companies_data = [
+    {
+        "Company Name": "Ace Data Analytics",
+        "Company Type": "MNC",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "10 Jun, 2026 - Wednesday",
+        "Package Min": "6.00",
+        "Package Max": "6.50",
+        "Package Avg": "6.25",
+        "Work Location": "Ahmedabad",
+        "Job Profile": "Software Developer",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "TECHNOLOGY",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 6.00 - 6.50 LPA"
+    },
+    {
+        "Company Name": "Ace Data Analytics",
+        "Company Type": "MNC",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "07 Jun, 2026 - Sunday",
+        "Package Min": "5.40",
+        "Package Max": "6.00",
+        "Package Avg": "5.70",
+        "Work Location": "Ahmedabad",
+        "Job Profile": "Software Developer",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "TECHNOLOGY",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 5.40 - 6.00 LPA"
+    },
+    {
+        "Company Name": "Alpha E Barcode Solutions",
+        "Company Type": "India Level",
+        "Campus Date & Time": "",
+        "Last Registration Date": "01 Jul, 2026 - Wednesday",
+        "Package Min": "4.0",
+        "Package Max": "5.0",
+        "Package Avg": "4.5",
+        "Work Location": "Ahmedabad",
+        "Job Profile": "Dot Net Developer",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "INFORMATION",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 4.0 to 5.0 LPA"
+    },
+    {
+        "Company Name": "Amenity Technologies Private",
+        "Company Type": "India Level",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "12 Jul, 2026 - Sunday",
+        "Package Min": "",
+        "Package Max": "",
+        "Package Avg": "",
+        "Work Location": "Rajkot",
+        "Job Profile": "Python Developer / Business Developer",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "INFORMATION",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: CTC for Python Developer & Business Developer"
+    },
+    {
+        "Company Name": "Analytics Liv Digital LLP",
+        "Company Type": "India Level",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "05 Jul, 2026 - Sunday",
+        "Package Min": "2.50",
+        "Package Max": "3.00",
+        "Package Avg": "2.75",
+        "Work Location": "Ahmedabad",
+        "Job Profile": "Technical Analyst - Trainee / SEO Fresher",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "TECHNOLOGY",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "Will be declared to registered students",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 2.50 - 3.00 LPA, Google Partner Agency"
+    },
+    {
+        "Company Name": "Armakuni Ltd.",
+        "Company Type": "MNC Level",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "09 Jul, 2026 - Thursday",
+        "Package Min": "7.0",
+        "Package Max": "7.0",
+        "Package Avg": "7.0",
+        "Work Location": "Ahmedabad",
+        "Job Profile": "AI/ML Engineer",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "INFORMATION",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 7.0 LPA"
+    },
+    {
+        "Company Name": "ATRI Solutions",
+        "Company Type": "MNC Level",
+        "Campus Date & Time": "27 Jun, 2026 - Saturday 09:00",
+        "Last Registration Date": "21 Jun, 2026 - Sunday",
+        "Package Min": "4.0",
+        "Package Max": "5.0",
+        "Package Avg": "4.5",
+        "Work Location": "Ahmedabad/ Gandhinagar",
+        "Job Profile": "Junior Software / AI",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 4.0 to 5.0 LPA"
+    },
+    {
+        "Company Name": "Creatuares",
+        "Company Type": "State Level",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "25 Jun, 2026 - Thursday",
+        "Package Min": "",
+        "Package Max": "",
+        "Package Avg": "",
+        "Work Location": "Ahmedabad",
+        "Job Profile": "Business Development",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "INFORMATION",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Business Development profile"
+    },
+    {
+        "Company Name": "Cypherox Technologies Private",
+        "Company Type": "MNC",
+        "Campus Date & Time": "17 Jul, 2026 - Friday 09:00",
+        "Last Registration Date": "12 Jul, 2026 - Sunday",
+        "Package Min": "2.64",
+        "Package Max": "2.64",
+        "Package Avg": "2.64",
+        "Work Location": "Rajkot",
+        "Job Profile": "Project Coordinator",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "INFORMATION",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 2.64 LPA"
+    },
+    {
+        "Company Name": "eInfochips",
+        "Company Type": "MNC Level",
+        "Campus Date & Time": "31 Jul, 2026 - Friday 09:00",
+        "Last Registration Date": "15 Jul, 2026 - Wednesday",
+        "Package Min": "5.0",
+        "Package Max": "5.0",
+        "Package Avg": "5.0",
+        "Work Location": "Ahmedabad",
+        "Job Profile": "Associate Engineer",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "TECHNOLOGY",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 5.0 LPA + 60K Joining Bonus"
+    },
+    {
+        "Company Name": "EnactOn Technologies Private",
+        "Company Type": "State Level",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "16 Jul, 2026 - Thursday",
+        "Package Min": "3",
+        "Package Max": "4",
+        "Package Avg": "3.5",
+        "Work Location": "Surat",
+        "Job Profile": "DevOps Engineer",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "INFORMATION",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 3 to 4 LPA"
+    },
+    {
+        "Company Name": "EsJay IT Solutions Private",
+        "Company Type": "State Level",
+        "Campus Date & Time": "11 Jul, 2026 - Saturday 09:00",
+        "Last Registration Date": "07 Jul, 2026 - Tuesday",
+        "Package Min": "2.6",
+        "Package Max": "2.6",
+        "Package Avg": "2.6",
+        "Work Location": "Rajkot",
+        "Job Profile": "Node.js Developer",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "INFORMATION",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 2.6 LPA"
+    },
+    {
+        "Company Name": "Flexio (Redgenie Technologies)",
+        "Company Type": "India Level",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "03 Jul, 2026 - Friday",
+        "Package Min": "3.25",
+        "Package Max": "3.25",
+        "Package Avg": "3.25",
+        "Work Location": "Ahmedabad, Mohali, Durgapur, Bhubaneswar",
+        "Job Profile": "AI Data Associate",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "INFORMATION",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 3.25 LPA"
+    },
+    {
+        "Company Name": "Hex Wireless Pvt. Ltd.",
+        "Company Type": "MNC Level",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "12 Jul, 2026 - Sunday",
+        "Package Min": "",
+        "Package Max": "",
+        "Package Avg": "",
+        "Work Location": "Vadodara",
+        "Job Profile": "Sales Development / Software Development",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "TECHNOLOGY",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Sales Development / Software Development roles"
+    },
+    {
+        "Company Name": "Infibrain Technologies LLP",
+        "Company Type": "State Level",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "20 May, 2026 - Wednesday",
+        "Package Min": "3",
+        "Package Max": "3.5",
+        "Package Avg": "3.25",
+        "Work Location": "Rajkot",
+        "Job Profile": "Business",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "INFORMATION",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 3 to 3.5 LPA"
+    },
+    {
+        "Company Name": "Infrassist Technologies Pvt Ltd",
+        "Company Type": "MNC Level",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "30 Jun, 2026 - Tuesday",
+        "Package Min": "",
+        "Package Max": "",
+        "Package Avg": "",
+        "Work Location": "Ahmedabad",
+        "Job Profile": "Jr. System & Cloud",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "INFORMATION",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Salary Progression based role"
+    },
+    {
+        "Company Name": "iView Labs Pvt. Ltd",
+        "Company Type": "MNC Level",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "01 Jul, 2026 - Wednesday",
+        "Package Min": "2.5",
+        "Package Max": "3.0",
+        "Package Avg": "2.75",
+        "Work Location": "Ahmedabad",
+        "Job Profile": "Software Developer",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "INFORMATION",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 2.5 to 3.0 LPA"
+    },
+    {
+        "Company Name": "Jumbo Homes",
+        "Company Type": "India Level",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "01 May, 2026 - Friday",
+        "Package Min": "10",
+        "Package Max": "10",
+        "Package Avg": "10",
+        "Work Location": "Bangalore",
+        "Job Profile": "Business",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "ENGINEERING",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 10 LPA + uncapped incentives"
+    },
+    {
+        "Company Name": "Kenexai",
+        "Company Type": "India Level",
+        "Campus Date & Time": "Will Be Declared Soon",
+        "Last Registration Date": "26 Apr, 2026 - Sunday",
+        "Package Min": "5.60",
+        "Package Max": "5.60",
+        "Package Avg": "5.60",
+        "Work Location": "Ahmedabad",
+        "Job Profile": "Data Engineer",
+        "Eligibility Criteria 10th %": "",
+        "Eligibility Criteria 12th %": "",
+        "Eligibility Criteria CGPA/CPI": "",
+        "Eligibility Criteria Backlog": "",
+        "Eligibility Criteria Gap": "",
+        "Eligibility Criteria Branch": "INFORMATION AND",
+        "Eligibility Criteria Course": "",
+        "Selection Process": "",
+        "Number of Rounds": "",
+        "Required Documents": "",
+        "Venue": "",
+        "Bond": "",
+        "Stipend": "",
+        "Other Info": "Package: 5.60 LPA"
+    },
+]
+
+# Write data rows
+for row_idx, company in enumerate(companies_data, 2):
+    for col_idx, header in enumerate(headers, 1):
+        cell = ws.cell(row=row_idx, column=col_idx, value=company.get(header, ""))
+        cell.border = thin_border
+        cell.alignment = Alignment(vertical="center", wrap_text=True)
+
+# Adjust column widths
+column_widths = {
+    'A': 25,  # Company Name
+    'B': 15,  # Company Type
+    'C': 25,  # Campus Date & Time
+    'D': 22,  # Last Registration Date
+    'E': 12,  # Package Min
+    'F': 12,  # Package Max
+    'G': 12,  # Package Avg
+    'H': 30,  # Work Location
+    'I': 30,  # Job Profile
+    'J': 18,  # Eligibility 10th %
+    'K': 18,  # Eligibility 12th %
+    'L': 20,  # Eligibility CGPA/CPI
+    'M': 20,  # Eligibility Backlog
+    'N': 15,  # Eligibility Gap
+    'O': 20,  # Eligibility Branch
+    'P': 20,  # Eligibility Course
+    'Q': 20,  # Selection Process
+    'R': 15,  # Number of Rounds
+    'S': 20,  # Required Documents
+    'T': 25,  # Venue
+    'U': 15,  # Bond
+    'V': 15,  # Stipend
+    'W': 35,  # Other Info
+}
+
+for col_letter, width in column_widths.items():
+    ws.column_dimensions[col_letter].width = width
+
+# Freeze header row
+ws.freeze_panes = 'A2'
+
+# Save
+wb.save('/Users/mihirmithani/Downloads/Placement/placement_data.xlsx')
+print("Excel file created successfully!")
+print(f"Total companies: {len(companies_data)}")
+print(f"Total columns: {len(headers)}")
